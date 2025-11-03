@@ -20,6 +20,11 @@ func main() {
 		panic(err)
 	}
 
+	// Defer ensures a function is called at the end of the program's execution,
+	// after all other operations are complete,
+	// which is useful for closing database connections
+	defer app.DB.Close()
+
 	r := routes.SetupRoutes(app)
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", port),
